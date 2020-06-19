@@ -1,0 +1,26 @@
+composer create-project --prefer-dist laravel/laravel youwaMember "5.5.*"
+在文件夹下新建一个laravel的方法 没有vendor要执行composer update
+php artisan key:generate  运行生成key
+创建控制器命令
+php artisan make:controller Admin\LoginController
+
+app/org/code 验证码的方法类
+use App\Org\code\Code; 加载完之后
+执行composer dump-autoload 自动加载
+
+创建一个数据库模型
+php artisan make:model Model\User
+
+//创建一个资源路由  自动生成增删改查功能
+php artisan make:controller Admin\UserController
+|        | GET|HEAD  | admin/user             | user.index   | App\Http\Controllers\Admin\UserController@index    | web,isLogin  |
+|        | POST      | admin/user             | user.store   | App\Http\Controllers\Admin\UserController@store    | web,isLogin  |
+|        | GET|HEAD  | admin/user/create      | user.create  | App\Http\Controllers\Admin\UserController@create   | web,isLogin  |
+|        | GET|HEAD  | admin/user/{user}      | user.show    | App\Http\Controllers\Admin\UserController@show     | web,isLogin  |
+|        | PUT|PATCH | admin/user/{user}      | user.update  | App\Http\Controllers\Admin\UserController@update   | web,isLogin  |
+|        | DELETE    | admin/user/{user}      | user.destroy | App\Http\Controllers\Admin\UserController@destroy  | web,isLogin  |
+|        | GET|HEAD  | admin/user/{user}/edit | user.edit    | App\Http\Controllers\Admin\UserController@edit     | web,isLogin  |
+|        | GET|HEAD  | admin/welcome          |              | App\Http\Controllers\Admin\LoginController@welcome | web,isLogin  |
+|        | GET|HEAD  | api/user               |              | Closure                                            | api,auth:api |
+
+html:5 再按table键 快速生成html模板
