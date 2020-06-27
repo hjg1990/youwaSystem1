@@ -24,3 +24,46 @@ php artisan make:controller Admin\UserController
 |        | GET|HEAD  | api/user               |              | Closure                                            | api,auth:api |
 
 html:5 再按table键 快速生成html模板
+
+分页方式   UserController中$user= User::paginate(5);//获取分页方式     blade.php页面显示方式 {!! $user->render() !!}
+
+
+增:
+Model::insert(array)
+Model::insertGetId(array)
+$ob->save
+foreach($arr as $k=->$v)
+
+删:
+Model:where()->delete()
+table()
+where()
+
+改:
+where()
+Model:where()->update(array())
+$ob = Xxx::where()->first()
+$ob -> 字段名 = 值;
+$ob ->save();
+table()
+
+查:
+table()
+select()
+where()
+groupBy()
+orderBy()
+limit()
+offset()
+join()
+leftjoin()
+rightjoin()
+distinct()
+union()
+get()
+first()
+count()
+
+paginate()
+
+$cols->appends()->links()

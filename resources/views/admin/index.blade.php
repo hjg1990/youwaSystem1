@@ -7,14 +7,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        @include('admin.public.styles')
-        @include('admin.public.script')
+        <link rel="stylesheet" href="{{ asset('admin/css/font.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/css/login.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/css/xadmin.css') }}">
+        <link rel="stylesheet" href="{{ asset('admin/css/theme3832.min.css') }}">
+
+        <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"> 改成本地js</script>-->
+        <script language="javascript" src="{{ asset('admin/js/jquery.min.js') }}" charset="utf-8" ></script>
+
+        <script language="javascript" src="{{ asset('admin/lib/layui/layui.js') }}" charset="utf-8"></script>
+        <!--[if lt IE 9]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
         <script>
             // 是否开启刷新记忆tab功能
             // var is_remember = false;
         </script>
     </head>
+    <script language="javascript" src="{{ asset('admin/js/xadmin.js') }}" charset="utf-8" ></script>
     <body class="index">
         <!--    头部引入-->
         @include('admin.public.header')

@@ -5,22 +5,42 @@ namespace App\Http\Controllers\Admin;
 use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     /**
      * 获取用户列表
      * @return
+     * admin/user
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.user.list');
+        $input = $request->all();
+        //dd($input);
+        //模糊查询的方式 和 排序的方式
+        $user = User::orderBy('user_id','asc')->where(function($query) use($request){
+              $username = $request->input('username');
+              $email = $request->input('email');
+              if (!empty($username)){
+                  $query->where('user_name','like','%'.$username.'%');
+              }
+             if (!empty($email)){
+                $query->where('email','like','%'.$email.'%');
+             }
+        })->paginate($request->input('num')?$request->input('num'):5);//排序
+
+//        $user= User::get();//获取所有数据
+       // $user= User::paginate(5);//获取分页方式
+        return view('admin.user.list',compact('user','request')); //把request也带到页面
 
     }
 
     /**
      * 返回用户添加页面
      * @return
+     * admin/user/create
      */
     public function create()
     {
@@ -45,9 +65,8 @@ class UserController extends Controller
         $username = $input['username'];
         $pass = Crypt::encrypt($input['pass']);
         $email = $input['email'];
-
-        $res = User::create(['user_name'=>$username,'user_pass'=>$pass,'email'=>$email]);
-
+        $phone = $input['phone'];
+        $res = User::create(['user_name'=>$username,'user_pass'=>$pass,'email'=>$email,'phone'=>$phone]);
          //4.根据添加是否成功，给用户一个json格式的反馈
         if ($res){
             $data = [
@@ -84,6 +103,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::find($id);
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
