@@ -46,5 +46,7 @@
 ### html:5 再按table键 快速生成html模板
 
 ### git remote add origin https://github.com/hjg1990/pr2017.git 在远程github创建一个仓库 建立连接
-###    git push -u origin master                                上传本地代码到远程仓库
+###    git push -u origin master   上传本地代码到远程仓库
+###  git add . 添加
+###  git commit -m "描述一个页面"
 

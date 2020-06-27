@@ -67,3 +67,5 @@ count()
 paginate()
 
 $cols->appends()->links()
+
+添加一个方式方法
