@@ -53,4 +53,5 @@
 ###  git push 上传页面 
 ###  git status 查看状态
 ###  git push origin master  代码上传两次
-
+###  git reflog 获取所有的提交记录   
+###  git reset --hard HEAD @ {n}，按Enter键确认  回退版本方法
