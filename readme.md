@@ -45,10 +45,12 @@
 
 ### html:5 再按table键 快速生成html模板
 
-### git remote add origin https://github.com/hjg1990/pr2017.git 在远程github创建一个仓库 建立连接
-###    git push -u origin master   上传本地代码到远程仓库
+###  git init 在空文件夹中使用后可以生成一个.git的文件夹 就是工作区
+###  git remote add origin https://github.com/hjg1990/pr2017.git 在远程github创建一个仓库 建立连接
+###  git push -u origin master   上传本地代码到远程仓库
 ###  git add . 添加
 ###  git commit -m "描述一个页面"
 ###  git push 上传页面 
 ###  git status 查看状态
+###  git push origin master  代码上传两次
 
