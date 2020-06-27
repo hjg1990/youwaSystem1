@@ -78,7 +78,7 @@
                                 @foreach($user as $v)
                                   <tr>
                                     <td>
-                                      <input type="checkbox" name="id" value="1"   lay-skin="primary"> 
+                                      <input type="checkbox" name="id" data-id="{{ $v->user_id }}" value="1"   lay-skin="primary">
                                     </td>
                                     <td>{{ $v->user_id }}</td>
                                     <td>{{ $v->user_name }}</td>
@@ -97,7 +97,7 @@
                                       <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                                         <i class="layui-icon">&#xe631;</i>
                                       </a>
-                                      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                      <a title="删除" onclick="member_del(this,{{ $v->user_id }})" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
                                       </a>
                                     </td>
@@ -173,9 +173,19 @@
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
+              $.post('/admin/user/'+id,{"_method":"delete","_token":"{{ csrf_token() }}"},function(data){
+                  console.log(data);
+                       if (data.status == 0){
+                           $(obj).parents("tr").remove();
+                           layer.msg(data.message,{icon:6,time:1000});
+                       }else {
+                           layer.msg(data.message,{icon:5,time:1000});
+                       }
+              })
+
               //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              // $(obj).parents("tr").remove();
+              // layer.msg('已删除!',{icon:1,time:1000});
           });
       }
 
@@ -190,7 +200,8 @@
                ids.push($(this).val())
             }
         });
-  
+         console.log(ids);
+
         layer.confirm('确认要删除吗？'+ids.toString(),function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});
