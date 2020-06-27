@@ -49,4 +49,6 @@
 ###    git push -u origin master   上传本地代码到远程仓库
 ###  git add . 添加
 ###  git commit -m "描述一个页面"
+###  git push 上传页面 
+###  git status 查看状态
 
