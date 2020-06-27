@@ -116,7 +116,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //根据id获取要修改的记录
+        $user = User::find($id);
+//        获取要修改的用户名
+        $username = $request->input('username');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+
+        $user->user_name = $username;
+        $user->email = $email;
+        $user->phone = $phone;
+
+        $res = $user->save();
+
+        if ($res){
+            $data = [
+                'status' => 0,
+                'message' =>"修改成功",
+            ];
+        }else{
+            $data = [
+                'status' => 1,
+                'message' =>"修改失败",
+            ];
+        }
+        return $data;
     }
 
     /**
