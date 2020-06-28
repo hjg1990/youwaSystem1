@@ -78,7 +78,7 @@
                                 @foreach($user as $v)
                                   <tr>
                                     <td>
-                                      <input type="checkbox" name="id" data-id="{{ $v->user_id }}" value="1"   lay-skin="primary">
+                                      <input type="checkbox" name="id" value="{{{ $v->user_id }}}"   lay-skin="primary">
                                     </td>
                                     <td>{{ $v->user_id }}</td>
                                     <td>{{ $v->user_name }}</td>
@@ -193,7 +193,6 @@
 
       function delAll (argument) {
         var ids = [];
-
         // 获取选中的id 
         $('tbody input').each(function(index, el) {
             if($(this).prop('checked')){
@@ -202,10 +201,17 @@
         });
          console.log(ids);
 
-        layer.confirm('确认要删除吗？'+ids.toString(),function(index){
+        layer.confirm('确认要批量删除吗？'+ids.toString(),function(index){
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+            $.get('/admin/user/dell',{ids:ids},function (data) {
+                if (data.status == 0){
+                    $(".layui-form-checked").not('.header').parents('tr').remove();
+                    layer.msg(data.message,{icon:6,time:1000});
+                }else {
+                    layer.msg(data.message,{icon:5,time:1000});
+                }
+            })
+
         });
       }
     </script>

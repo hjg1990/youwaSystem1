@@ -43,6 +43,31 @@
 -    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
 -  });
 
+
+##权限原理RBAC
+1
+-  user 用户表        id  username   pass
+-  user_role 用户角色关联表  user_id   role_id
+-  role 角色表        id  role_name（系统管理员，部门经理）  created_at  updated_at deleted_at
+-  role_permisson 角色权限关联表  role_id  permisson_id
+-  permisson 权限表   id  per_name（用户修改权限）   per_url(路由地址App\Http\Controllers\Admin\UserController@edit)
+
+2,创建用户模型  角色模型  权限模型  php artisan make:model Model\Role
+3.角色路由 //角色路由
+           Route::resource('role','RoleController');
+           php artisan make:controller Admin\RoleController  --resource
+4.          
+
+
+
+
+
+
+
+
+
+
+
 ### html:5 再按table键 快速生成html模板
 
 ###  git init 在空文件夹中使用后可以生成一个.git的文件夹 就是工作区

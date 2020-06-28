@@ -125,10 +125,10 @@ class LoginController extends Controller
 //         3.crypt加密
           $str1 = '123456';
          $crypt_str = Crypt::encrypt($str1);
-         //return $crypt_str;
+         return $crypt_str;
          //crypt解密
-          $str2 = "eyJpdiI6IkUzMzRcL1NXSEpLRnRvOGNRbTBOYlBRPT0iLCJ2YWx1ZSI6Ikl2alZTSUZaSk1BS3E0TmMzTjNKM0E9PSIsIm1hYyI6ImNhYjQ1NTYwYmQ2MjE5ZTkxYjRkNWM0ZjNmMWUzZGMyMjBlYzVhZGZlNDU5MDU5OWQ0M2M5Y2M0ZTM3Y2MyODEifQ==";
-          return  Crypt::decrypt($str2);
+//          $str2 = "eyJpdiI6IkUzMzRcL1NXSEpLRnRvOGNRbTBOYlBRPT0iLCJ2YWx1ZSI6Ikl2alZTSUZaSk1BS3E0TmMzTjNKM0E9PSIsIm1hYyI6ImNhYjQ1NTYwYmQ2MjE5ZTkxYjRkNWM0ZjNmMWUzZGMyMjBlYzVhZGZlNDU5MDU5OWQ0M2M5Y2M0ZTM3Y2MyODEifQ==";
+//          return  Crypt::decrypt($str2);
 
     }
 

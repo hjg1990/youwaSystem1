@@ -29,7 +29,7 @@ class UserController extends Controller
              if (!empty($email)){
                 $query->where('email','like','%'.$email.'%');
              }
-        })->paginate($request->input('num')?$request->input('num'):5);//排序
+        })->paginate($request->input('num')?$request->input('num'):10);//排序
 
 //        $user= User::get();//获取所有数据
        // $user= User::paginate(5);//获取分页方式
@@ -165,5 +165,30 @@ class UserController extends Controller
             ];
         }
         return $data;
+    }
+
+    /**
+     * 删除所有选中的用户方法
+     */
+    public function dellALL(Request $request)
+    {
+        //返回一个用户ID数组
+        $input = $request->input('ids');
+
+        $res = User::destroy($input);//可以删除一个，也可以删除数组
+
+        if ($res){
+            $data = [
+                'status'=>0,
+                'message'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'message'=>'删除失败'
+            ];
+        }
+        return $data;
+
     }
 }
