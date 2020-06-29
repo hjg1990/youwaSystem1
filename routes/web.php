@@ -24,7 +24,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::post('dologin','LoginController@doLogin');
 });
 
-
 //路由后台组  定义中间件
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],function(){
     //后台首页路由
@@ -34,13 +33,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     //后台退出登录路由
     Route::get('logout','LoginController@logout');
     //自定义根据多个id删除多条数据
-    Route::get('user/dell','UserController@dellALL');
-    //后台用户模块相关路由
-    Route::resource('user','UserController');
-
+    Route::get('supervisor/dell','SupervisorController@dellALL');
+    //管理员路由
+    Route::resource('supervisor','SupervisorController');
 
     //角色路由
     Route::resource('role','RoleController');
+
+    //自定义根据多个id删除多条数据
+    Route::get('user/dell','UserController@dellALL');
+    //后台用户模块相关路由
+    Route::resource('user','UserController');
 });
 //加密算法
 //  Route::get('admin/jiami','Admin\LoginController@jiami');

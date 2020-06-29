@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Supervisor;
 use App\Model\User;
 use App\Org\code\Code;
 use Illuminate\Http\Request;
@@ -28,6 +29,10 @@ class LoginController extends Controller
         return $code->make();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * 后台登录后的总页面
+     */
     public function index()
     {
         return view('admin.index');
@@ -46,16 +51,17 @@ class LoginController extends Controller
         //2.表单验证
 //        Validator::make(需要验证的表单数据,验证规则，错误提示）
         $rule = [
-            'username'=>'required|between:4,18',
-            'password'=>'required|between:4,18,alpha_dash'
+            'supervisor_name'=>'required|between:4,18',
+            'supervisor_pass'=>'required|between:4,18,alpha_dash'
         ];
          $msg = [
-             'username.required'=>'用户名不能为空',
-             'username.between'=>'用户名必须输入4-18位之间',
-             'password.required'=>'密码不能为空',
-             'password.between'=>'密码必须输入4-18位之间',
-             'password.alpha_dash'=>'密码必须是数字或下划线',
+             'supervisor_name.required'=>'用户名不能为空',
+             'supervisor_name.between'=>'用户名必须输入4-18位之间',
+             'supervisor_pass.required'=>'密码不能为空',
+             'supervisor_pass.between'=>'密码必须输入4-18位之间',
+             'supervisor_pass.alpha_dash'=>'密码必须是数字或下划线',
          ];
+         //表单验证类
         $validator = Validator::make($input,$rule,$msg) ;
 //        验证失败返回
         if ($validator->fails()){
@@ -64,19 +70,19 @@ class LoginController extends Controller
                    ->withInput();
         }
 //        3.验证是否由此用户登录（验证码,用户名，密码，）
-           $user = User::where('user_name',$input['username'])->first();
+          $supervisor = Supervisor::where('supervisor_name',$input['supervisor_name'])->first();
         //strtolower大小写验证码
          if (strtolower($input['code']) != strtolower(session()->get('code'))){
              return redirect('admin/login')->with('errors','验证码不正确');
          }
-          if (!$user){
+          if (!$supervisor){
               return redirect('admin/login')->with('errors','用户名不正确');
          }
-          if($input['password'] != Crypt::decrypt($user->user_pass)){
+          if($input['supervisor_pass'] != Crypt::decrypt($supervisor->supervisor_pass)){
               return redirect('admin/login')->with('errors','密码不正确');
           }
 //        4.保存用户信息到session中
-        session()->put('user',$user);
+        session()->put('supervisor',$supervisor);
 
 //        5.跳转到后台首页
           return redirect('admin/index');

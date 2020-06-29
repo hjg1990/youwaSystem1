@@ -3,51 +3,53 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Supervisor;
-use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+/**
+ * Class SupervisorController
+ * @package App\Http\Controllers\Admin
+ * 超级管理员控制器
+ */
+class SupervisorController extends Controller
 {
     /**
      * 获取用户列表
      * @return
-     * admin/user
+     * admin/supervisor
      */
     public function index(Request $request)
     {
-        $input = $request->all();
+        //$input = $request->all();
         //dd($input);
-        //模糊查询的方式 和 排序的方式
-
-        $user = User::orderBy('user_id','asc')->where(function($query) use($request){
-            $username = $request->input('username');
+        //这里是查询的方式 模糊查询的方式 和 排序的方式
+        $supervisor = Supervisor::orderBy('supervisor_id','asc')->where(function ($query) use($request){
+            $supervisor_name = $request->input('supervisor_name');
             $email = $request->input('email');
-            if (!empty($username)){
-                $query->where('user_name','like','%'.$username.'%');
+            if (!empty($supervisor_name)){
+                $query->where('user_name','like','%'.$supervisor_name.'%');
             }
             if (!empty($email)){
                 $query->where('email','like','%'.$email.'%');
             }
         })->paginate($request->input('num')?$request->input('num'):10);//排序
 
-//        $user= User::get();//获取所有数据
+        //        $user= User::get();//获取所有数据
         // $user= User::paginate(5);//获取分页方式
-        return view('admin.user.list',compact('supervisor','request')); //把request也带到页面
+        return view('admin.supervisor.list',compact('supervisor','request')); //把request也带到页面
 
     }
 
     /**
      * 返回用户添加页面
      * @return
-     * admin/user/create
+     * admin/supervisor/create
      */
     public function create()
     {
         //
-        return view('admin.user.add');
+        return view('admin.supervisor.add');
     }
 
     /**
@@ -58,31 +60,36 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        //1.接收前台表单提交的数据  username pass repass email
+        //1.接收前台表单提交的数据
+        //  email" => "xyzjg@123.com"
+        //  "phone" => "13262851204"
+        //  "supervisor_name" => "xyzjig"
+        //  "supervisor_pass" => "123456"
+        //  "supervisor_repass" => "123456"
         $input = $request->all();
         //dd($input);
         //2.进行表单验证
 
         // 3.添加到数据库的user表
-        $username = $input['username'];
-        $pass = Crypt::encrypt($input['pass']);
+        $supervisor_name = $input['supervisor_name'];
+        $supervisor_pass = Crypt::encrypt($input['supervisor_pass']);
         $email = $input['email'];
         $phone = $input['phone'];
-        $res = User::create(['user_name'=>$username,'user_pass'=>$pass,'email'=>$email,'phone'=>$phone]);
-         //4.根据添加是否成功，给用户一个json格式的反馈
+        $res =Supervisor::create(['supervisor_name'=>$supervisor_name,'supervisor_pass'=>$supervisor_pass,'email'=>$email,'phone'=>$phone]);
+        //4.根据添加是否成功，给用户一个json格式的反馈
         if ($res){
             $data = [
-              'status' => 0,
-              'message'=>'添加成功'
+                'status' => 0,
+                'message'=>'添加成功'
             ];
         }else{
             $data = [
-              'status'  => 1,
-              'message' => '添加失败'
+                'status'  => 1,
+                'message' => '添加失败'
             ];
         }
         //返回json的数据
-         return $data;
+        return $data;
     }
 
     /**
@@ -105,8 +112,8 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $user = User::find($id);
-        return view('admin.user.edit',compact('user'));
+        $supervisor = Supervisor::find($id);
+        return view('admin.supervisor.edit',compact('supervisor'));
     }
 
     /**
@@ -119,17 +126,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //根据id获取要修改的记录
-        $user = User::find($id);
+        $supervisor = Supervisor::find($id);
 //        获取要修改的用户名
-        $username = $request->input('username');
+        $supervisor_name = $request->input('supervisor_name');
         $email = $request->input('email');
         $phone = $request->input('phone');
 
-        $user->user_name = $username;
-        $user->email = $email;
-        $user->phone = $phone;
+        $supervisor->supervisor_name = $supervisor_name;
+        $supervisor->email = $email;
+        $supervisor->phone = $phone;
 
-        $res = $user->save();
+        $res = $supervisor->save();
 
         if ($res){
             $data = [
@@ -153,12 +160,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $res = $user->delete();
+
+        $supervisor = Supervisor::find($id);
+        $res = $supervisor->delete();
         if ($res){
             $data = [
-              'status'=>0,
-              'message'=>'删除成功'
+                'status'=>0,
+                'message'=>'删除成功'
             ];
         }else{
             $data = [
@@ -176,8 +184,7 @@ class UserController extends Controller
     {
         //返回一个用户ID数组
         $input = $request->input('ids');
-
-        $res = User::destroy($input);//可以删除一个，也可以删除数组
+        $res = Supervisor::destroy($input);//可以删除一个，也可以删除数组
 
         if ($res){
             $data = [

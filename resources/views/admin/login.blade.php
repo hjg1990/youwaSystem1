@@ -34,9 +34,9 @@
         
         <form method="post" class="layui-form" action="{{ url('admin/dologin') }}" >
             {{ csrf_field() }}
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <input name="supervisor_name" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input name="supervisor_pass" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
             <input name="code" lay-verify="required" style="width: 150px;float: left" placeholder="验证码"  type="text" class="layui-input">
 {{--                                                                                                 添加随机数，浏览器缓存--}}

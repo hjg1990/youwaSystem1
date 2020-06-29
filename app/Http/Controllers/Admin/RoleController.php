@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,23 +14,26 @@ use App\Http\Controllers\Controller;
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 角色列表页面
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 返回创建一个添加页面
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        //角色添加页面
+        return view('admin.role.add');
+        
     }
 
     /**

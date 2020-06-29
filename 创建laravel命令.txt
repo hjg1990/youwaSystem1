@@ -11,6 +11,16 @@ use App\Org\code\Code; 加载完之后
 创建一个数据库模型
 php artisan make:model Model\User
 
+           POST      | admin/supervisor                   | supervisor.store   | App\Http\Controllers\Admin\SupervisorController@store   | web,isLogin  |
+|        | GET|HEAD  | admin/supervisor                   | supervisor.index   | App\Http\Controllers\Admin\SupervisorController@index   | web,isLogin  |
+|        | GET|HEAD  | admin/supervisor/create            | supervisor.create  | App\Http\Controllers\Admin\SupervisorController@create  | web,isLogin  |
+|        | DELETE    | admin/supervisor/{supervisor}      | supervisor.destroy | App\Http\Controllers\Admin\SupervisorController@destroy | web,isLogin  |
+|        | GET|HEAD  | admin/supervisor/{supervisor}      | supervisor.show    | App\Http\Controllers\Admin\SupervisorController@show    | web,isLogin  |
+|        | PUT|PATCH | admin/supervisor/{supervisor}      | supervisor.update  | App\Http\Controllers\Admin\SupervisorController@update  | web,isLogin  |
+|        | GET|HEAD  | admin/supervisor/{supervisor}/edit | supervisor.edit    | App\Http\Controllers\Admin\SupervisorController@edit    | web,isLogin  |
+
+
+
 //创建一个资源路由  自动生成增删改查功能
 php artisan make:controller Admin\UserController
 |        | GET|HEAD  | admin/user             | user.index   | App\Http\Controllers\Admin\UserController@index    | web,isLogin  |

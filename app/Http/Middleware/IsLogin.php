@@ -19,7 +19,7 @@ class IsLogin
         /**
          * 获取session中的用吗
          */
-        if (session('user')) {
+        if (session('supervisor')) {
             return $next($request);
         } else {
             return redirect('admin/login')->with('errors', '请不要另辟蹊径！');

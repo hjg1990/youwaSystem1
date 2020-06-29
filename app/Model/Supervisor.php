@@ -5,22 +5,22 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class User
+ * Class Supervisor
  * @package App\Model
- * 用户表模型
+ * 超级管理员模型
  */
-class User extends Model
+class Supervisor extends Model
 {
+    //
     //1.关联数据表
-    public $table = 'user';
+    public $table = 'supervisor';
 
     //2.主键
-    public $primaryKey ='user_id';
+    public $primaryKey ='supervisor_id';
 
     //3.允许操作字段
-    public $fillable = ['user_name','user_pass','email','phone'];
+    //public $fillable = ['user_name','user_pass','email','phone'];
     public $guarded=[];//不允许操作字段
     //4.是否维护created_at 和 updated_at
     //public $timestamps = false;
-
 }
