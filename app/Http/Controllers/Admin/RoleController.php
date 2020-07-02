@@ -21,7 +21,8 @@ class RoleController extends Controller
     public function index()
     {
         //
-
+        $role = Role::get();
+        return view('admin.role.list',compact('role'));
     }
 
     /**

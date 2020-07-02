@@ -32,13 +32,16 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'isLogin'],fu
     Route::get('welcome','LoginController@welcome');
     //后台退出登录路由
     Route::get('logout','LoginController@logout');
-    //自定义根据多个id删除多条数据
+
+    //自定义根据多个管理员id删除多条数据
     Route::get('supervisor/dell','SupervisorController@dellALL');
     //管理员路由
     Route::resource('supervisor','SupervisorController');
-
     //角色路由
     Route::resource('role','RoleController');
+
+
+
 
     //自定义根据多个id删除多条数据
     Route::get('user/dell','UserController@dellALL');

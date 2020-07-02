@@ -57,7 +57,7 @@
                         </div>
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','{{ url('admin/supervisor/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加管理员','{{ url('admin/supervisor/create') }}',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
